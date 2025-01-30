@@ -22,7 +22,11 @@
 
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load('kyle.jpg'); // Make sure this path is correct
-        const material = new THREE.MeshBasicMaterial({ map: texture }); 
+        const materialKyle = new THREE.MeshBasicMaterial({ map: texture }); 
+        const texture2 = textureLoader.load('mochi.jpg'); // Make sure this path is correct
+        const materialMochi = new THREE.MeshBasicMaterial({ map: texture2 });
+        const texture3 = textureLoader.load('beefy.jpg'); // Make sure this path is correct
+        const materialBeefy = new THREE.MeshBasicMaterial({ map: texture3 });
 
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
@@ -37,17 +41,25 @@
 
         // Add a cube
         const geometry = new THREE.BoxGeometry();
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        const cubeKyle = new THREE.Mesh(geometry, materialKyle);
+        scene.add(cubeKyle);
+        const cubeMochi = new THREE.Mesh(geometry, materialMochi);
+        scene.add(cubeMochi);
+        const cubeBeefy = new THREE.Mesh(geometry, materialBeefy);
+        scene.add(cubeBeefy);
 
+        cubeBeefy.position.x = -2;
+        cubeMochi.position.x = 2;
         camera.position.z = 2;
         camera.position.y = 1.5;
-        camera.lookAt(cube.position); // Look at the center
+        camera.lookAt(cubeKyle.position); // Look at the center
 
         // Animation loop
         function animate() {
             requestAnimationFrame(animate);
-            cube.rotation.y -= 0.01;
+            cubeBeefy.rotation.y -= 0.01;
+            cubeMochi.rotation.y -= 0.01;
+            cubeKyle.rotation.y -= 0.01;
             renderer.render(scene, camera);
         }
         animate();
